@@ -1,0 +1,57 @@
+import java.util.Random;
+
+public class Comb_Sort {
+    public int[] randomArray(int jumlah) {
+        int[] arr = new int[jumlah];
+        Random r = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(100);
+        }
+        return arr;
+    }
+    public void tampilArray(int[] arr){
+        for (int i:arr) {
+            System.out.print(i+" ");
+        }
+    }
+    public int[] urut(int[] arr)
+    {
+        int n = arr.length;
+
+        int gap = n;
+
+        boolean swapped = true;
+
+        while (gap != 1 || swapped)
+        {
+            gap = (gap*10)/13;
+            if (gap < 1)
+                gap = 1;
+
+            swapped = false;
+
+            for (int i=0; i<n-gap; i++)
+            {
+                if (arr[i] > arr[i+gap])
+                {
+                    int temp = arr[i];
+                    arr[i] = arr[i+gap];
+                    arr[i+gap] = temp;
+
+                    swapped = true;
+                }
+            }
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        Comb_Sort nc = new Comb_Sort();
+        int[] array = nc.randomArray(6);
+        System.out.println("Array: ");
+        nc.tampilArray(array);
+        System.out.println("\n\nArray Terurut: ");
+        int[] arrayUrut = nc.urut(array);
+        nc.tampilArray(arrayUrut);
+    }
+}
